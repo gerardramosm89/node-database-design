@@ -1,10 +1,13 @@
+'use strict';
 const express = require('express');
+const bodyParser = require('body-parser');
 const routes = require('./routes/routes');
+const mongoose = require('mongoose');
 var app = express();
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/myStuff');
 
-app.get('/api', (req, res) => {
-	res.send({ message: "Hello sir" });	
-});
+app.use(bodyParser.json());
 
 routes(app);
 

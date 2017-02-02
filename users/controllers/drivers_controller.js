@@ -4,6 +4,9 @@ module.exports = {
 	greeting(req, res) {
 		res.send({ message: "Hello there!"});
 	},
+	fetch(req, res, next){
+		Driver.find({}).then(drivers => res.send(drivers));
+	},
 	create(req, res, next){
 		const driverProps = req.body;
 		Driver.create(driverProps)

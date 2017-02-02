@@ -15,7 +15,17 @@ module.exports = {
 		const driverProps = req.body;
 
 		Driver.findByIdAndUpdate({ _id: driverId }, driverProps)
-			.then(() => Driver.findById({ _id: id}))
+			.then(() => Driver.findById({ _id: driverId}))
+			.then(driver => res.send(driver))
+			.catch(next);
+	},
+	delete(req, res, next){
+		const driverId = req.params.id;
+		const driverProps = req.body;
+
+		Driver.findByIdAndRemove({ _id: driverId }, driverProps)
+			//.then(() => Driver.findById({ _id: driverId}))
+			.then(driver => res.send({ message: "User was deleted"}))
 			.catch(next);
 	}
 };

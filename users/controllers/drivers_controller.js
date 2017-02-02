@@ -8,9 +8,14 @@ module.exports = {
 		const driverProps = req.body;
 		Driver.create(driverProps)
 			.then(driver => res.send(driver))
-			.catch(() => {
-				res.send( { 'Error Message': 'Contact admin about the error' });
-				next
-			});
+			.catch(next);
+	},
+	edit(req, res, next){
+		const driverId = req.params.id;
+		const driverProps = req.body;
+
+		Driver.findByIdAndUpdate({ _id: driverId }, driverProps)
+			.then(() => Driver.findById({ _id: id}))
+			.catch(next);
 	}
 };
